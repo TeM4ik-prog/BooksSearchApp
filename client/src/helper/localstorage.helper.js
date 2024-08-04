@@ -18,3 +18,15 @@ export function removeTokenFromLocalStorage(key) {
     localStorage.removeItem(key)
 
 }
+
+
+
+
+
+export function getLastIndexOfParsedBook() {
+    return parseInt(localStorage.getItem('lastBookIndex')) || 0
+}
+
+export function setLastIndexOfParsedBook(index_book) {
+    localStorage.setItem('lastBookIndex', index_book);
+}

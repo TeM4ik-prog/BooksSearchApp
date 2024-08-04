@@ -44,3 +44,18 @@
     margin: 0;
   }
 }
+
+#root::-webkit-scrollbar {
+  background: $dark-color;
+  width: 7px;
+  height: 5px;
+  z-index: 100;
+}
+
+
+#root::-webkit-scrollbar-thumb {
+  background: #838383;
+  border-radius: 10px;
+  position: absolute;
+
+}

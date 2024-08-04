@@ -25,33 +25,3 @@ body a {
 
 
 
-body::-webkit-scrollbar {
-  appearance: none;
-  width: 5px;
-  height: 5px;
-  border-radius: 5px;
-  z-index: 100;
-}
-
-
-body::-webkit-scrollbar-thumb {
-  background: #838383;
-  border-radius: 10px;
-  position: absolute;
-
-}
-
-html::-webkit-scrollbar {
-  appearance: none;
-  width: 5px;
-  height: 30px;
-  border-radius: 5px;
-  z-index: 100;
-}
-
-html::-webkit-scrollbar-thumb {
-  background: #838383;
-  border-radius: 10px;
-  position: absolute;
-
-}

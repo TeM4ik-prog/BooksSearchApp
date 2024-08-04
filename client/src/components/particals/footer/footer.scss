@@ -1,6 +1,7 @@
 @import '../../../assets/variables.scss';
 
 .footer-container {
+    transform: translateY(100%);
     margin-top: auto;
     width: 100%;
     display: inline-flex;

@@ -15,6 +15,12 @@
     border-radius: 8px;
     gap: 0.75rem;
 
+    img{
+        width: min-content;
+        height: calc(8em + 8vw);
+        margin: auto;
+    }
+
 
     .info-container {
 
