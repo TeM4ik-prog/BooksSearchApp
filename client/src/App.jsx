@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 import './App.scss'
@@ -15,12 +14,9 @@ function App() {
 
       <Router>
         <Header />
-
-        <div className='body-container'>
-          <Routes>
-            <Route path='/' element={<MainPage />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+        </Routes>
         <Footer />
       </Router>
 

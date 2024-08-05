@@ -7,11 +7,11 @@ export default function BooksList({ books }) {
 
 
     return (
-        <div className="books-list-container">
-            <h1>Results:</h1>
+        <div className="result">
+            <h1 className="result__heading">Results:</h1>
             {
-                books.map((book_data, index) => (
-                    <BookOne key={index} info={book_data} />
+                books.map((bookData, index) => (
+                    <BookOne key={index} info={bookData} />
                 ))
             }
         </div>

@@ -4,23 +4,30 @@ export default function Header() {
 
 
     return (
-        <div className="header-container">
+        <header className="header">
 
 
             <Link to={'/'}>
                 <img src="icons/logo.svg" />
             </Link>
 
-            <div className="nav-container">
-                <div className="nav-items">
-                    <p>home</p>
-                    <p>about</p>
-                    <p>contacts</p>
-                </div>
+            <nav className="nav">
+                <ul className="nav__list">
+                    <li className="nav__item">
+                        <Link to={'/'} className="nav__link">Home</Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link to={'about'} className="nav__link">About</Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link to={'contact'} className="nav__link">Contacts</Link>
+                    </li>
+                </ul>
+            </nav>
+            <button className="menu-button">
                 <img src="icons/nav.svg" className="nav-icon"/>
-            </div>
+            </button>
 
-
-        </div>
+        </header>
     )
 }

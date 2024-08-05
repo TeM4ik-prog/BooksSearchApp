@@ -1,5 +1,14 @@
 @import '../../assets/variables.scss';
 
+.page {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-inline: clamp(16px, 4.45vw, 64px);
+    padding-block: 64px;
+}
 
 input {
     border: none;
@@ -13,22 +22,20 @@ input {
 }
 
 
-.filters-container {
+.filter {
     align-items: baseline;
     margin: calc(1rem + 1vw) 0 !important;
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    button{
+    &__button{
         color: $light-color;
         padding: 0.5rem 0.75rem;
         align-items: center;
-        border: none;
-        display: inline-flex;
+        display: flex;
         flex-direction: row;
         gap: 0.5rem;
         background-color: $blue-background-color;
-
     }
 }

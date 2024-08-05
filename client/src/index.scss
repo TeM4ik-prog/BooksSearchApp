@@ -3,21 +3,18 @@
 @font-face {
   font-family: 'Inconsolata';
   src: url('./assets/fonts/Inconsolata-VariableFont_wdth\,wght.ttf') format('truetype');
-  font-weight: 700;
   font-style: normal;
 }
 
 #root {
   font-family: Inconsolata;
-  font-weight: 700;
   background-color: $light-color;
-  color: $dark-color;
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
-  height: max-content;
+  height: fit-content;
   min-height: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,19 +25,9 @@
   * {
     font-family: Inconsolata;
     margin: 0;
-  }
-}
-
-
-.body-container {
-  height: 100%;
-  flex: 1;
-  display: inline-flex;
-  flex-direction: column;
-  padding: calc(0.5rem + 0.75vw);
-  box-sizing: border-box;
-
-  & * {
-    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
   }
 }

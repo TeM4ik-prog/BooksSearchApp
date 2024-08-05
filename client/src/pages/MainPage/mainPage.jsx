@@ -8,33 +8,31 @@ export default function MainPage() {
         author: 'John Doe',
       
         categories: ['fiction', 'Fantasy'],
-        page_count: 1021,
+        pageCount: 1021,
 
         ISBN: '098796856789',
         rating: 4.5
-
     }])
 
     return (
-        <>
+        <main className="page">
             <h1>Find any book!</h1>
 
-            <input placeholder="Start typing" />
+            <form className="search-form">
+             <input placeholder="Start typing" className="search-form__input-field"/>
 
-            <div className="filters-container">
-                <p>3 results</p>
+                <div className="filter">
+                    <p className="filter__results">3 results</p>
 
-                <button>
-                    <p>Filters</p>
-                    <img src="icons/filter.svg" />
-                </button>
-            </div>
-
-
-
+                    <button className="filter__button">
+                        Filters
+                        <img src="icons/filter.svg" className="filter__icon"/>
+                    </button>
+                </div>
+            </form>
 
             <BooksList books={booksList} />
 
-        </>
+        </main>
     )
 }

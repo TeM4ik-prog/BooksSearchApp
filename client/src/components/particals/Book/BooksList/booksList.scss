@@ -1,5 +1,9 @@
-.books-list-container{
-    display: inline-flex;
+.result{
+    display: flex;
     flex-direction: column;
     gap: calc(1em + 1vw);
+}
+
+.result__heading {
+    font-size: clamp(24px, 5vw, 72px);
 }

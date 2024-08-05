@@ -1,35 +1,35 @@
 @import '../../../assets/variables.scss';
 
-.footer-container {
-    margin-top: auto;
+.footer {
     width: 100%;
-    display: inline-flex;
+    display: flex;
     background-color: $blue-background-color;
     padding: calc(0.5rem + 0.75vw) calc(0.5rem + 1.25vw);
-    box-sizing: border-box;
+    padding-inline: clamp(16px, 4.45vw, 64px);
     flex-direction: row;
     justify-content: space-between;
-    color: $light-color;
-
-    font-size: calc(0.5rem + 1.25vw);
-
-
-    .nav-container {
-        p {
-            margin: auto;
-        }
+    
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    &__nav-link {
+        margin: auto;
+        font-size: calc(0.5rem + 1.25vw);
+        color: $light-color;
     }
 
-    .footer-links-container {
-        display: inline-flex;
-        width:fit-content;
+    &__contacts {
+        display: flex;
+        width: fit-content;
         gap: 1.5vw;
-
-        img {
-            width: calc(2em + 0.2vw);
-            margin: auto;
-            // width: auto;
-
-        }
     }
+    
+    &__contact-icon {
+        width: 64px;
+        aspect-ratio: 1;
+    }
+    
 }
+
