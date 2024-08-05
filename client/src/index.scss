@@ -9,6 +9,7 @@
 #root {
   font-family: Inconsolata;
   background-color: $light-color;
+  
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -20,7 +21,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: auto;
+  overflow-y: none;
+
+  flex: 1;
 
   * {
     font-family: Inconsolata;
@@ -30,4 +33,16 @@
     outline: none;
     text-decoration: none;
   }
+}
+
+
+
+button {
+  font-weight: 700;
+  color: $light-color;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: $blue-background-color;
 }
