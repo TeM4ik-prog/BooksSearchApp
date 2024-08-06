@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 
 import { Prisma } from '@prisma/client';
@@ -16,8 +16,9 @@ export class BooksController {
 
 
   @Get()
-  findAll() {
-    return this.booksService.findAll();
+  findAll(@Query() query) {
+    console.log('Query parameters:', query)
+    return this.booksService.findAll(query)
   }
 
 }

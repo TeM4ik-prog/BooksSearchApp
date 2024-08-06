@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 import "./parserPage.scss"
-import { useState } from 'react'
-import { getLastIndexOfParsedBook, setLastIndexOfParsedBook } from '../../helper/localstorage.helper'
+import { useEffect, useState } from 'react'
+import { clearLastIndexOfParsedBook, getLastIndexOfParsedBook, setLastIndexOfParsedBook } from '../../helper/localstorage.helper'
 
 const API_KEY = 'AIzaSyChA_GntfiksRFSq9Xw8Q0ek-_P7NtKQHU'
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes'
@@ -10,14 +10,15 @@ const MAX_RESULTS = 20
 
 
 import { toast } from 'react-toastify'
+import { BooksService } from '../../services/books.service'
 
 export default function ParserPage() {
-    const [lastBookIndex, setLastBookIndex] = useState()
+    const [lastBookIndex, setLastBookIndex] = useState(getLastIndexOfParsedBook())
 
     const [queryInput, setQueryInput] = useState('')
     const [valueBooks, setValueBooks] = useState()
 
-    let postParsedBooks = (booksAr) => {
+    const postParsedBooks = (booksAr) => {
         toast.loading('Saving books...')
         axios.post(
             `http://localhost:3000/api/books/saveBooksInDb`,
@@ -31,18 +32,36 @@ export default function ParserPage() {
                 console.log(error)
             });
     }
+    const startParseHandle = () => {
 
-
-
-    let startParseHandle = () => {
         async function fetchBooks(startIndex) {
-            const URL = `${BASE_URL}?q='${queryInput}'&orderBy=relevance&startIndex=0&maxResults=${MAX_RESULTS}&fields=items(volumeInfo(title,authors,publisher,publishedDate,pageCount,categories,imageLinks,infoLink))&key=${API_KEY}`;
-
             try {
-                const response = await axios.get(URL);
+                const response = await BooksService.getFindBooksFromApi(queryInput, startIndex)
                 console.log(response)
 
-                return response.data.items.map(({ volumeInfo }) => volumeInfo) || [];
+                let booksAr = response.data.items.map(({ volumeInfo }) => volumeInfo)
+                console.log(booksAr)
+
+                let newBooksAr = []
+
+                for (let i = 0; i < booksAr.length; i++) {
+                    let oldBook = booksAr[i]
+                    let book = {
+                        author: oldBook?.authors?.[0] || null,
+                        category: oldBook?.categories?.[0] || null,
+                        imageLink: oldBook?.imageLinks?.smallThumbnail || null,
+                        infoLink: oldBook?.infoLink || null,
+                        pageCount: oldBook?.pageCount || null,
+                        publisher: oldBook?.publisher || null,
+                        title: oldBook?.title || null,
+                        publishedDate: oldBook?.publishedDate || null,
+                    }
+                    console.log(book)
+                    newBooksAr.push(book)
+                }
+
+                console.log(newBooksAr)
+                return newBooksAr || []
             } catch (error) {
                 console.error('Error fetching books:', error.message);
                 return [];
@@ -54,7 +73,6 @@ export default function ParserPage() {
             let allBooks = [];
             toast.loading(`Fetching books...`);
 
-
             while (allBooks.length <= valueBooks) {
                 const books = await fetchBooks(startIndex);
                 if (books.length === 0) break
@@ -62,13 +80,11 @@ export default function ParserPage() {
                 startIndex += MAX_RESULTS;
 
             }
-            // setLastIndexOfParsedBook(getLastIndexOfParsedBook() + allBooks.length)
-            // setLastBookIndex(getLastIndexOfParsedBook())
+            setLastIndexOfParsedBook(getLastIndexOfParsedBook() + allBooks.length)
+            setLastBookIndex(getLastIndexOfParsedBook())
 
             toast.dismiss();
             toast.success(`Fetched ${allBooks.length} books`)
-
-
 
             postParsedBooks(allBooks)
         }
@@ -78,9 +94,14 @@ export default function ParserPage() {
 
 
     return (
-        <>
+        <main className="page">
             <h1>Parser Page</h1>
             <p>This is the Parser page.</p>
+
+            <button onClick={() => {
+                clearLastIndexOfParsedBook()
+                setLastBookIndex(0)
+            }}>Clear localstorage</button>
 
 
             <input
@@ -97,7 +118,7 @@ export default function ParserPage() {
                 placeholder="value of books"
             ></input>
 
-            <button onClick={startParseHandle}>Parse</button>
-        </>
+            <button onClick={startParseHandle}>Parse {lastBookIndex}</button>
+        </main>
     )
 }

@@ -20,15 +20,15 @@ model Users {
 }
 
 model Book {
-  id            Int      @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   title         String?
-  authors       String[]
+  author        String?
   publishedDate String?
   publisher     String?
   pageCount     Int?
-  categories    String[]
+  category      String?
   infoLink      String?
-  imageLinks    Json?     
+  imageLink     String?
 
   @@map("books") // Название таблицы в базе данных
 }

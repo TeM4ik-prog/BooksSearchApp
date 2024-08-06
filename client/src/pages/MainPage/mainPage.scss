@@ -11,18 +11,20 @@
 }
 
 input {
-        border: none;
-        background-color: transparent;
-        appearance: none;
-        font-size: calc(1em + 1vw);
-        padding: 0.5rem 0;
-    
-        outline: none;
-        border-bottom: 1px solid #9CA5A1;
-    }
+    border: none;
+    background-color: transparent;
+    appearance: none;
+    font-size: calc(1em + 1vw);
+    padding: 0.5rem 0;
+
+    outline: none;
+    border-bottom: 1px solid #9CA5A1;
+}
 
 
 .search-form {
+    display: inline-flex;
+    flex-direction: column;
     width: 100%;
 
     &__query {
@@ -32,7 +34,9 @@ input {
         justify-content: space-between;
     }
 
-    
+
+
+
 }
 
 
@@ -62,8 +66,10 @@ input {
     width: calc(15em + 20vw);
     height: auto;
     max-width: 100%;
-   
-    border-radius: 0.4rem;
+    width: min-content;
+
+    
+    border-radius: 0.75rem;
     padding: 0.75rem;
     z-index: 1000;
 
@@ -88,23 +94,95 @@ input {
             cursor: pointer;
         }
 
+
+
+
+
     }
 
-    &__from-params{
+    &__form-params {
         display: inline-flex;
         flex-direction: column;
+        gap: 0.5rem;
 
-        &__row{
+
+        &__row {
             display: inline-flex;
             flex-direction: row;
+
+
         }
 
-        input{
-            color: $light-color;
+        input {
+            color: $light-color !important;
+
+
+            border-bottom: 1px solid $light-color !important;
+            
         }
+
+       
     }
 
+    // .input-block {
+    //     width: 100%;
+    //     display: inline-flex;
+    //     flex-direction: column;
+    //     margin-bottom: 0.5rem;
+    //     padding-bottom: 0.5rem;
+    //     align-items: flex-start;
+    //     color: $light-color;
+    //     border-bottom: 1px solid gray;
+    //     border-color: $light-color;
+    // }
 
+    // .input-block label {
+
+    //     font-size: calc(0.5em + 0.5vw);
+    //     font-weight: 600;
+    //     color: $light-color;
+
+
+    // }
+
+
+    // .range-inputs-container {
+    //     width: 100%;
+    //     display: inline-flex;
+    //     flex-direction: row;
+    //     flex-wrap: nowrap;
+    //     justify-content: space-between;
+    // }
+
+    // .range-inputs-container input {
+    //     width: 42.5%;
+    // }
+
+
+}
+
+
+.pagination{
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-top: auto !important;
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    align-self: flex-end;
+    gap: 0.75rem;
+    align-items: center;
+    
+    justify-content: center;
+
+
+
+
+
+    &__pageIndex{
+        font-size: calc(0.75rem + 1.25vw);
+        font-weight: 700;
+    }
 }
 
 

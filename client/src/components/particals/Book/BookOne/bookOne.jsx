@@ -8,7 +8,7 @@ export default function BookOne({ info }) {
             <h2>{info.title}</h2>
 
             <div className="book__info-column">
-                <img src={info.imageLinks?.smallThumbnail} alt={info.title || emptyBookField}></img>
+                <img src={info.imageLink} alt={info.title || emptyBookField}></img>
 
 
                 <div className="book__info-row">
@@ -32,18 +32,23 @@ export default function BookOne({ info }) {
                 </div>
 
                 <div className="book__info-row">
+                    <p className="book__info-value">Publisher: </p>
+                    <p className="book__info-value">{info.publisher || emptyBookField}</p>
+                </div>
+
+                <div className="book__info-row">
                     <p className="book__info-value">Rating: </p>
                     <p className="book__info-value">{info.rating || emptyBookField}</p>
                 </div>
 
 
-                <button href={info.infoLink}>Detailed Info</button>
+                <button onClick={() => window.location = info.infoLink}>Detailed Info</button>
 
 
 
 
             </div>
 
-        </div>
+        </div >
     )
 }

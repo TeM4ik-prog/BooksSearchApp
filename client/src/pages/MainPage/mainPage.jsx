@@ -1,36 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BooksList from "../../components/particals/Book/BooksList/booksList";
 
 import "./mainPage.scss"
 import { BooksService } from "../../services/books.service";
+import { toast } from "react-toastify";
 export default function MainPage() {
     const [booksList, setBooksList] = useState([])
-    const [queryInput, setQueryInput] = useState('')
-    const [isFilterOpen, setIsFilterOpen] = useState(true)
+    // const [queryInput, setQueryInput] = useState('')
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
+    const [searchParams, setSearchParams] = useState('')
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage] = useState(15)
 
 
-    let SearchHandle = async (e) => {
-        e.preventDefault()
+    useEffect(() => {
+        getBooksHandle();
+    }, [currentPage]);
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    };
+
+    const getBooksHandle = async (e) => {
+        if (e) e.preventDefault()
+
+        console.log(searchParams)
         try {
-            const response = await BooksService.getFindBooksFromApi(queryInput)
-            setBooksList(response.data.items.map(({ volumeInfo }) => volumeInfo) || [])
-        } catch (error) {
-            console.error('Error fetching books:', error.message);
-            return [];
-        }
-    }
+            const data = await BooksService.getBooks({
+                query: searchParams,
+                page: currentPage,
+                limit: itemsPerPage,
 
-    let getAllBooksHandle = async () => {
-        try {
-            const data = await BooksService.getBooks();
+            });
+            console.log(data)
             if (data) {
                 toast.success('Books got successfully')
-                setBooksList(data);
+                setBooksList(data)
+                setIsFilterOpen(false)
             }
         } catch (err) {
             toast.error('Error getting products');
         }
     }
+
+    const handleChangeParams = (e) => {
+        const { name, value } = e.target;
+        setSearchParams((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     return (
         <main className="page">
@@ -38,11 +59,12 @@ export default function MainPage() {
 
             <div className="search-form">
 
-                <form onSubmit={(e) => SearchHandle(e)} className="search-form__query">
+                <form onSubmit={(e) => getBooksHandle(e)} className="search-form__query">
                     <input
                         type="text"
-                        value={queryInput}
-                        onChange={(e) => setQueryInput(e.target.value)}
+                        value={searchParams.title}
+                        name='title'
+                        onChange={handleChangeParams}
                         placeholder="Start typing"
                         className="search-form__input-field"
                     />
@@ -61,6 +83,19 @@ export default function MainPage() {
 
 
                 <BooksList books={booksList} />
+
+
+
+            </div>
+
+            <div className="pagination">
+                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                    Prev
+                </button>
+                <p className="pagination__pageIndex">{currentPage}</p>
+                <button onClick={() => handlePageChange(currentPage + 1)}>
+                    Next
+                </button>
             </div>
 
 
@@ -79,21 +114,19 @@ export default function MainPage() {
                             </img>
                         </div>
 
-                        <from className='filter-field__form-params'>
-                            <input placeholder="Author"></input>
-
-                            <input placeholder="Categories"></input>
-
+                        <form onSubmit={(e) => getBooksHandle(e)} className='filter-field__form-params' >
+                            <input placeholder="Author" value={searchParams.author} name='author' onChange={handleChangeParams}></input>
+                            <input placeholder="Categories" value={searchParams.category} name='category' onChange={handleChangeParams}></input>
                             <div className="filter-field__form-params__row">
-                                <input placeholder="Min page count"></input>
-                                <input placeholder="Max page count"></input>
+                                <input type="number" placeholder="Min page count" value={searchParams.minPages} name='minPages' onChange={handleChangeParams}></input>
+                                <input type="number" placeholder="Max page count" value={searchParams.maxPages} name='maxPages' onChange={handleChangeParams}></input>
                             </div>
+                            <input placeholder="Publisher" value={searchParams.publisher} name='publisher' onChange={handleChangeParams}></input>
 
 
 
-
-
-                        </from>
+                            <button>Search</button>
+                        </form>
 
 
 
