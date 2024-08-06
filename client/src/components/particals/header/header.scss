@@ -2,43 +2,73 @@
 
 
 .header {
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    height: fit-content;
-    justify-content: space-between;
-    background-color: $blue-background-color;
-    color: $light-color;
-    padding-inline: clamp(16px, 4.45vw, 64px);
-    padding-block: 16px;
-    box-sizing: border-box;
-    align-items: center;
-
-}
-
-.nav__list {
-    list-style: none;
+    aspect-ratio: 1.5;
+    position: relative;
     display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: center;
-
-    @media (max-width: 768px) {
-        & {
-            display: none;
-        }
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    background-image: url('../../../assets/images/header-bg.webp');
+    background-attachment: local;
+    background-size: cover;
+    padding-inline: clamp(16px, 4.45vw, 64px);
+    &__top {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding-block: 16px;
+        padding-inline: clamp(16px, 4.45vw, 64px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__heading {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+    &__title {
+        font-size: 96px;
+        text-align: left;
+        color: $white;
+    }
+    &__subtitle {
+        font-size: 64px;
+        text-align: right;
+        color: $white;
     }
 }
 
-.nav__item {
-    display: block;
-}
 
-.nav__link {
-    text-decoration: none;
-    color: $light-color;
-    font-size: 48px;
-    font-weight: 500;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    &__list {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+    
+        @media (max-width: 768px) {
+            & {
+                display: none;
+            }
+        }
+    }
+    
+    &__item {
+        display: block;
+    }
+    
+    &__link {
+        text-decoration: none;
+        color: $white;
+        font-size: 40px;
+        font-weight: 500;
+    }
 }
 
 .menu-button {

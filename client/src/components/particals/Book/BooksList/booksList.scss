@@ -1,9 +1,6 @@
 .result{
-    display: flex;
-    flex-direction: column;
-    gap: calc(1em + 1vw);
-}
-
-.result__heading {
-    font-size: clamp(24px, 5vw, 72px);
+    padding-block: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
 }

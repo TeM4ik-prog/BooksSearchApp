@@ -1,38 +1,49 @@
 @import "../../../../assets/variables.scss";
 
 .book {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    box-sizing: border-box;
-
-    // border-top: 1px solid $blue-background-color;
-    // border-bottom: 1px solid $blue-background-color;
-
-    background-color: rgb(88, 79, 79);
-    color: $light-color;
-    border-radius: 8px;
-    gap: 0.75rem;
-
-
-}
-.book__info-column {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.5rem;
-    width: 100%;
-}
-.book__info-row {
-    width: 100%;
-    padding-bottom: 0.25rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-}
-
-.book__info-value {
     
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    background: transparent;
+    border: 1px solid $grey-secondary;
+
+    &__info-column {
+        display: flex;
+        flex-direction: column;
+    
+        gap: 16px;
+        width: 100%;
+    }
+
+    &__info-row {
+        width: 100%;
+        padding-bottom: 0.25rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &__title {
+        font-size: 48px;
+    }
+    &__text {
+        font-size: 40px;
+        &--bold {
+            font-weight: 700;
+        }
+    }
+    &__show-button {
+        width: 100%;
+        padding-block: 16px;
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        background-color: $primary;
+        color: $white;
+    }
+
 }
+

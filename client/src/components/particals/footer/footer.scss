@@ -3,7 +3,7 @@
 .footer {
     width: 100%;
     display: flex;
-    background-color: $blue-background-color;
+    background-color: $primary;
     padding: calc(0.5rem + 0.75vw) calc(0.5rem + 1.25vw);
     padding-inline: clamp(16px, 4.45vw, 64px);
     flex-direction: row;
@@ -15,9 +15,8 @@
         gap: 16px;
     }
     &__nav-link {
-        margin: auto;
-        font-size: calc(0.5rem + 1.25vw);
-        color: $light-color;
+        font-size: 48px;
+        color: $white;
     }
 
     &__contacts {
@@ -27,7 +26,7 @@
     }
     
     &__contact-icon {
-        width: 64px;
+        width: 128px;
         aspect-ratio: 1;
     }
     

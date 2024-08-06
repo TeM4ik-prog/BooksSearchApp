@@ -3,7 +3,17 @@ import BooksList from "../../components/particals/Book/BooksList/booksList";
 
 import "./mainPage.scss"
 export default function MainPage() {
-    const [booksList, setBooksList] = useState([{
+    const [booksList] = useState([{
+        title: 'Lorem ipsum dolor sit amet consectetur adipi',
+        author: 'John Doe',
+      
+        categories: ['fiction', 'Fantasy'],
+        pageCount: 1021,
+
+        ISBN: '098796856789',
+        rating: 4.5
+    },
+    {
         title: 'Lorem ipsum dolor sit amet consectetur adipi',
         author: 'John Doe',
       
@@ -16,21 +26,22 @@ export default function MainPage() {
 
     return (
         <main className="page">
-            <h1>Find any book!</h1>
-
             <form className="search-form">
-             <input placeholder="Start typing" className="search-form__input-field"/>
+                <div className="search-form__input-container">
+                    <input placeholder="Start typing" className="search-form__input-field"/>
+                </div>
 
                 <div className="filter">
-                    <p className="filter__results">3 results</p>
+                    <p className="filter__results-found">3 results</p>
 
-                    <button className="filter__button">
+                    <button type="button" className="filter__button">
                         Filters
                         <img src="icons/filter.svg" className="filter__icon"/>
                     </button>
                 </div>
             </form>
 
+            <h1 className="result-title">Results:</h1>
             <BooksList books={booksList} />
 
         </main>
