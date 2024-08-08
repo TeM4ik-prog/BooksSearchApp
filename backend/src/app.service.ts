@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { account } from './appwrite';
+
 import { Account, Client, OAuthProvider } from 'appwrite';
-import { } from "./appwrite"
+
 
 @Injectable()
 export class AppService {

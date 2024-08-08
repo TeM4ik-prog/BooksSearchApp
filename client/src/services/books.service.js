@@ -2,7 +2,7 @@ import { instance } from "../api/axios.api"
 
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes'
 const API_KEY = 'AIzaSyChA_GntfiksRFSq9Xw8Q0ek-_P7NtKQHU'
-const MAX_RESULTS = 40;
+const MAX_RESULTS = 10;
 
 export const BooksService = {
 
@@ -21,7 +21,11 @@ export const BooksService = {
 
 
     async getFindBooksFromApi(queryInput, startIndex = 0) {
-        const URL = `${BASE_URL}?q='${queryInput}'&orderBy=relevance&startIndex=${startIndex}&maxResults=${MAX_RESULTS}&fields=items(volumeInfo(title,authors,publisher,publishedDate,pageCount,categories,imageLinks,infoLink))&key=${API_KEY}`;
+
+        // &fields=items(volumeInfo(title,authors,publisher,publishedDate,pageCount,categories,imageLinks,infoLink,description))
+
+        // &orderBy=relevance
+        const URL = `${BASE_URL}?q='${queryInput}'&startIndex=${startIndex}&maxResults=${MAX_RESULTS}&key=${API_KEY}`;
 
 
         return await instance.get(URL)

@@ -1,19 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
+import { CreateBookDto } from './dto/create-book-dto';
+import { CategoriesService } from 'src/categories/categories.service';
 
 
 @Injectable()
 export class BooksService {
-  constructor(private readonly databaseService: DatabaseService) { }
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly categoryService: CategoriesService
+  ) { }
 
-  async create(createBookDto: Prisma.BookCreateInput[]) {
+  async create(createBookDto: CreateBookDto[]) {
+    console.log(createBookDto);
     try {
-      const createPromises = createBookDto.map(book =>
-        this.databaseService.book.create({
-          data: book,
-        })
-      );
+      const createPromises = createBookDto.map(async (book) => {
+        const { authors, category, ...bookData } = book;
+        const uncategorizedCategory = await this.categoryService.getOrCreateUncategorizedCategory();
+
+        const authorRecords = await Promise.all(
+          authors.map(name =>
+            this.databaseService.author.upsert({
+              where: { name },
+              update: {},
+              create: { name },
+            })
+          )
+        );
+
+        let categoryRecord = uncategorizedCategory;
+        if (category) {
+          categoryRecord = await this.databaseService.category.findUnique({
+            where: { name: category },
+          }) || uncategorizedCategory;
+        }
+
+        return this.databaseService.book.create({
+          data: {
+            ...bookData,
+            authors: {
+              create: authorRecords.map(author => ({ authorId: author.id })),
+            },
+            categories: categoryRecord ? {
+              create: { categoryId: categoryRecord.id }
+            } : undefined,
+          },
+        });
+      });
 
       return await Promise.all(createPromises);
     } catch (error) {
@@ -82,9 +116,7 @@ export class BooksService {
       skip,
     });
 
+    console.log(books)
     return books;
   }
-
-
-
 }

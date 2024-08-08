@@ -16,7 +16,7 @@ export default function ParserPage() {
     const [lastBookIndex, setLastBookIndex] = useState(getLastIndexOfParsedBook())
 
     const [queryInput, setQueryInput] = useState('')
-    const [valueBooks, setValueBooks] = useState()
+    const [valueBooks, setValueBooks] = useState(1)
 
     const postParsedBooks = (booksAr) => {
         toast.loading('Saving books...')
@@ -39,24 +39,47 @@ export default function ParserPage() {
                 const response = await BooksService.getFindBooksFromApi(queryInput, startIndex)
                 console.log(response)
 
-                let booksAr = response.data.items.map(({ volumeInfo }) => volumeInfo)
-                console.log(booksAr)
+                let booksInfoAr = response.data.items
 
                 let newBooksAr = []
 
-                for (let i = 0; i < booksAr.length; i++) {
-                    let oldBook = booksAr[i]
+                for (let i = 0; i < booksInfoAr.length; i++) {
+                    let { accessInfo, volumeInfo } = booksInfoAr[i]
+
+                    // console.log(accessInfo, volumeInfo)
+
                     let book = {
-                        author: oldBook?.authors?.[0] || null,
-                        category: oldBook?.categories?.[0] || null,
-                        imageLink: oldBook?.imageLinks?.smallThumbnail || null,
-                        infoLink: oldBook?.infoLink || null,
-                        pageCount: oldBook?.pageCount || null,
-                        publisher: oldBook?.publisher || null,
-                        title: oldBook?.title || null,
-                        publishedDate: oldBook?.publishedDate || null,
+                        title: volumeInfo?.title || null,
+
+                        authors: volumeInfo?.authors || [],
+
+                        publisher: volumeInfo?.publisher || null,
+
+                        description: volumeInfo?.description || null,
+
+                        industryIdentifiers: JSON.stringify(volumeInfo?.industryIdentifiers) || [],
+
+                        pageCount: volumeInfo?.pageCount || null,
+
+                        category: volumeInfo?.categories?.[0] || null,
+
+                        averageRating: volumeInfo?.volumeInfo || null,
+
+                        imageLink: volumeInfo?.imageLinks?.smallThumbnail || null,
+
+                        language: volumeInfo?.language || null,
+
+                        publishedDate: volumeInfo?.publishedDate || null,
+
+                        infoLink: volumeInfo?.infoLink || null,
+
+                        previewLink: accessInfo.viewability === "NO_PAGES" ? null : volumeInfo?.previewLink || null,
+
                     }
+
+
                     console.log(book)
+
                     newBooksAr.push(book)
                 }
 

@@ -3,7 +3,7 @@ import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { account } from './appwrite';
+
 
 @Controller()
 export class AppController {
@@ -30,15 +30,6 @@ export class AppController {
 
     // Redirect to home or wherever you want
 
-  }
-
-
-
-  @Get('/getUser')
-  async getUser(@Res() res) {
-
-    const user = account.get()
-    console.log(user)
   }
 }
 
