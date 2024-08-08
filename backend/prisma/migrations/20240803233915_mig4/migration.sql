@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "books" ALTER COLUMN "publishedDate" DROP NOT NULL,
+ALTER COLUMN "pageCount" DROP NOT NULL,
+ALTER COLUMN "infoLink" DROP NOT NULL;

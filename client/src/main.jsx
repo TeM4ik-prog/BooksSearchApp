@@ -1,17 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.scss'
 import 'react-toastify/dist/ReactToastify.css';
-import {Provider} from "react-redux"
-import { store } from './store/store.js';
 import { ToastContainer } from 'react-toastify'
+import App from '#app';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+  <>
     <App />
 
     <ToastContainer position='bottom-left' autoClose={2000} />
-  </Provider>
+  </>
 )
