@@ -1,0 +1,11 @@
+.modal {
+    min-width: 100lvw;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: #0b090a;
+    opacity: 0.25;
+}
