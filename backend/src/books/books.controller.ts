@@ -20,4 +20,15 @@ export class BooksController {
     return this.booksService.findAll(query)
   }
 
+
+  // @Get('/quickSearch')
+  // findQuick(@Query() query) {
+  //   console.log('Query parameters:', query)
+  //   return this.booksService.findAll(query)
+  // }
+
+
+
+  
+
 }

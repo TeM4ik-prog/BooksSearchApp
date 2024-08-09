@@ -8,7 +8,7 @@ export default function Header() {
 
 
             <Link to={'/'}>
-                <img src="icons/logo.svg" />
+                <img src="../icons/logo.svg" />
             </Link>
 
             <nav className="nav">
@@ -25,7 +25,7 @@ export default function Header() {
                 </ul>
             </nav>
             <button className="menu-button">
-                <img src="icons/nav.svg" className="nav-icon"/>
+                <img src="../icons/nav.svg" className="nav-icon"/>
             </button>
 
         </header>

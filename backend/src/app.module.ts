@@ -10,6 +10,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { CategoriesService } from './categories/categories.service';
 import { categories } from 'prisma/assets/categories';
 import { DatabaseService } from './database/database.service';
+import { AuthorsModule } from './authors/authors.module';
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { DatabaseService } from './database/database.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+
+    AuthorsModule,
   ],
   controllers: [AppController],
   providers: [AppService, CategoriesService],

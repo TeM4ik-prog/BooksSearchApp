@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage/mainPage'
 import Header from './components/particals/header/header'
 import Footer from './components/particals/footer/footer'
 import ParserPage from './pages/ParserPage/parserPage'
+import AuthorPage from './pages/AuthorPage/authorPage'
 
 function App() {
 
@@ -18,6 +19,8 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/parser' element={<ParserPage />} />
+
+          <Route path='/author/:authorID' element={<AuthorPage />} />
         </Routes>
         <Footer />
       </Router>

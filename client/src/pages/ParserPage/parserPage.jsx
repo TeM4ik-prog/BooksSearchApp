@@ -75,6 +75,7 @@ export default function ParserPage() {
 
                         previewLink: accessInfo.viewability === "NO_PAGES" ? null : volumeInfo?.previewLink || null,
 
+                        // previewability: accessInfo.viewability === "NO_PAGES" ? null : volumeInfo?.previewLink || null,
                     }
 
 
@@ -109,7 +110,7 @@ export default function ParserPage() {
             toast.dismiss();
             toast.success(`Fetched ${allBooks.length} books`)
 
-            postParsedBooks(allBooks)
+            // postParsedBooks(allBooks)
         }
 
         main()

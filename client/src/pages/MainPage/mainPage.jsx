@@ -62,8 +62,8 @@ export default function MainPage() {
                 <form onSubmit={(e) => getBooksHandle(e)} className="search-form__query">
                     <input
                         type="text"
-                        value={searchParams.title}
-                        name='title'
+                        value={searchParams.quickSearch}
+                        name='quickSearch'
                         onChange={handleChangeParams}
                         placeholder="Start typing"
                         className="search-form__input-field"

@@ -13,9 +13,9 @@ export default function Footer() {
             </div>
 
             <div className="footer__contacts">
-                <img src="icons/links/telegram.svg" className="footer__contact-icon"/>
-                <img src="icons/links/gitHub.svg" className="footer__contact-icon"/>
-                <img src="icons/links/mail.svg" className="footer__contact-icon"/>
+                <img src="../icons/links/telegram.svg" className="footer__contact-icon"/>
+                <img src="../icons/links/gitHub.svg" className="footer__contact-icon"/>
+                <img src="../icons/links/mail.svg" className="footer__contact-icon"/>
             </div>
 
         </div>

@@ -25,7 +25,7 @@ model Book {
   id                  Int            @id @default(autoincrement())
   title               String?
   description         String?
-  industryIdentifiers String
+  industryIdentifiers String?
   pageCount           Int?
   averageRating       Float?
   imageLink           String?

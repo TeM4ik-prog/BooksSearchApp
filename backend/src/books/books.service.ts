@@ -12,6 +12,33 @@ export class BooksService {
     private readonly categoryService: CategoriesService
   ) { }
 
+  async findBooksWithDetails(options?: Prisma.BookFindManyArgs) {
+    return this.databaseService.book.findMany({
+      ...options,
+      include: {
+        authors: {
+          include: {
+            author: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        categories: {
+          include: {
+            category: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        }
+
+      }
+    });
+  }
+
   async create(createBookDto: CreateBookDto[]) {
     console.log(createBookDto);
     try {
@@ -56,67 +83,120 @@ export class BooksService {
     }
   }
 
-
   async findAll(query) {
-    const { queryParams, page = 1, limit = 15, ...otherQueryParams } = query;
-    console.log(queryParams)
-    let where: any = { ...otherQueryParams };
+    const { queryParams, page = 1, limit = 15 } = query;
 
-    if (queryParams) {
-      const { title, author, category, publisher, minPages, maxPages } = JSON.parse(queryParams);
-
-
-      if (title) {
-        where.title = {
-          contains: title,
-          mode: 'insensitive',
-        }
-      }
-
-      if (author) {
-        where.author = {
-          contains: author,
-          mode: 'insensitive',
-        };
-      }
-
-      if (category) {
-        where.category = {
-          contains: category,
-          mode: 'insensitive',
-        };
-      }
-
-      if (publisher) {
-        where.publisher = {
-          contains: publisher,
-          mode: 'insensitive',
-        };
-      }
-
-      if (minPages || maxPages) {
-        where.pageCount = {};
-        if (minPages) {
-          where.pageCount.gte = parseInt(minPages, 10);
-        }
-        if (maxPages) {
-          where.pageCount.lte = parseInt(maxPages, 10);
-        }
-      }
-    }
-
+    let where = await this.createDBWhere(queryParams)
     const take = parseInt(limit, 10) || 15;
     const skip = ((parseInt(page, 10) || 1) - 1) * take;
 
-    console.log(where)
-
-    const books = await this.databaseService.book.findMany({
+    return await this.findBooksWithDetails({
       where: where,
       take,
-      skip,
-    });
-
-    console.log(books)
-    return books;
+      skip
+    })
   }
+
+  async createDBWhere(queryParams: string) {
+    if (!queryParams) return {}
+    let where: any = {};
+
+    const {
+      quickSearch,
+      title,
+      author,
+      category,
+      publisher,
+      minPages,
+      maxPages,
+    } = JSON.parse(queryParams);
+
+    if (quickSearch) {
+      where.OR = [
+        {
+          title: {
+            contains: quickSearch,
+            mode: 'insensitive',
+          },
+        },
+        {
+          authors: {
+            some: {
+              author: {
+                name: {
+                  contains: quickSearch,
+                  mode: 'insensitive',
+                },
+              },
+            },
+          },
+        },
+        {
+          categories: {
+            some: {
+              category: {
+                name: {
+                  contains: quickSearch,
+                  mode: 'insensitive',
+                },
+              },
+            },
+          },
+        },
+      ];
+    }
+
+    if (title) {
+      where.title = {
+        contains: title,
+        mode: 'insensitive',
+      };
+    }
+
+    if (author) {
+      where.authors = {
+        some: {
+          name: {
+            contains: author,
+            mode: 'insensitive',
+          },
+        },
+      };
+    }
+
+    if (category) {
+      where.categories = {
+        some: {
+          category: {
+            name: {
+              contains: category,
+              mode: 'insensitive',
+            },
+          },
+        },
+      };
+    }
+
+    if (publisher) {
+      where.publisher = {
+        contains: publisher,
+        mode: 'insensitive',
+      };
+    }
+
+    if (minPages || maxPages) {
+      where.pageCount = {};
+      if (minPages) {
+        where.pageCount.gte = parseInt(minPages, 10);
+      }
+      if (maxPages) {
+        where.pageCount.lte = parseInt(maxPages, 10);
+      }
+    }
+
+    return where;
+  }
+
 }
+
+
