@@ -19,12 +19,11 @@ import { AuthorsModule } from './authors/authors.module';
     UsersModule,
     BooksModule,
     CategoriesModule,
+    AuthorsModule,
 
     ConfigModule.forRoot({
       isGlobal: true,
-    }),
-
-    AuthorsModule,
+    })
   ],
   controllers: [AppController],
   providers: [AppService, CategoriesService],
@@ -32,7 +31,6 @@ import { AuthorsModule } from './authors/authors.module';
 })
 export class AppModule implements OnModuleInit {
   constructor(private readonly categoriesService: CategoriesService,
-
     private readonly databaseService: DatabaseService
   ) { }
 
@@ -45,7 +43,6 @@ export class AppModule implements OnModuleInit {
 
   async onModuleInit() {
     await this.createCategoriesOnInit();
-
 
     //полная очистка базы данных
     // await this.cleanDatabase()

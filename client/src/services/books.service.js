@@ -13,8 +13,6 @@ export const BooksService = {
         if (page) params.append('page', page);
         if (limit) params.append('limit', limit);
 
-
-
         const { data } = await instance.get(`/books?${new URLSearchParams(params).toString()}`)
         return data
     },
