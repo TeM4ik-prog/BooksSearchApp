@@ -1,3 +1,3 @@
 import MainPage from "./ui/mainPage";
 
-export default MainPage
+export default MainPage;

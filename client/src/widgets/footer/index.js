@@ -1,3 +1,3 @@
 import Footer from "./ui/footer";
 
-export default Footer
+export default Footer;

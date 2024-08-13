@@ -1,0 +1,36 @@
+@import "../../shared/ui/variables.scss";
+.input {
+  max-width: 100%;
+  padding-block: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__label {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  &__field {
+    padding: 0;
+    max-width: calc(100% - 48px);
+    flex: 1, 0;
+    font-size: 48px;
+    background: transparent;
+    color: $grey-primary;
+    ::placeholder {
+      color: $grey-secondary;
+    }
+  }
+
+  &__clear-button {
+    width: 48px;
+    aspect-ratio: 1;
+    background: transparent;
+    transition: opacity 0.25s;
+    opacity: 1;
+    &--hidden {
+      opacity: 0;
+    }
+  }
+}

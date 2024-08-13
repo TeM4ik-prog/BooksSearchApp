@@ -1,28 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    books: [],
-    filters: {
-        preview: "any",
-        booksPerPage: 8,
-        pagesCount: {
-            min: 1,
-            max: null
-        }
-    }
-}
+  books: [],
+};
 const bookSlice = createSlice({
-    name: "book",
-    initialState,
-    reducers: {
-        updateBooks(state, action) {
-            state.books = action.payload.data
-        },
-        updateFilters(state, action) {
-            state.filters = action.payload.filter
-        }
-    }
-})
+  name: "book",
+  initialState,
 
-export const {} = bookSlice.actions
-export default bookSlice.reducer
+  reducers: {
+    updateBooks(state, action) {
+      state.books = action.payload.books;
+    },
+  },
+});
+
+export const { updateBooks } = bookSlice.actions;
+export default bookSlice.reducer;

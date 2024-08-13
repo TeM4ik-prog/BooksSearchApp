@@ -1,0 +1,19 @@
+@import "../../../shared/ui/variables.scss";
+.search-form {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: calc(50% - 32px) calc(50% - 32px);
+  column-gap: 64px;
+  row-gap: 32px;
+  &__section {
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  &__heading {
+    font-size: 60px;
+    font-weight: 700;
+    color: $grey-primary;
+  }
+}

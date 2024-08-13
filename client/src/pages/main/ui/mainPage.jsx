@@ -1,50 +1,48 @@
 import { useState } from "react";
 
-import "./mainPage.scss"
+import "./mainPage.scss";
 import Result from "#widgets/result";
+import Modal from "#shared/ui/modal";
+import { useDispatch } from "react-redux";
+import { openModal } from "#shared/model/modalSlice.js";
+import SearchModal from "#widgets/search-modal/ui/search-modal.jsx";
 function MainPage() {
-    const [booksList] = useState([{
-        title: "Lorem ipsum dolor sit amet consectetur adipi",
-        author: "John Doe",
-      
-        categories: ["fiction", "Fantasy"],
-        pageCount: 1021,
 
-        ISBN: "098796856789",
-        rating: 4.5
-    },
-    {
-        title: "Lorem ipsum dolor sit amet consectetur adipi",
-        author: "John Doe",
-      
-        categories: ["fiction", "Fantasy"],
-        pageCount: 1021,
+  const dispatch = useDispatch();
 
-        ISBN: "098796856789",
-        rating: 4.5
-    }])
+  return (
+    <main className="page">
+      <Modal modalName="advanced-search">
+        <SearchModal />
+      </Modal>
+      <form className="quick-search">
+        <div className="quick-search__input-container">
+          <input
+            placeholder="Start typing"
+            className="quick-search__input-field"
+          />
+        </div>
 
-    return (
-        <main className="page">
-            <form className="search-form">
-                <div className="search-form__input-container">
-                    <input placeholder="Start typing" className="search-form__input-field"/>
-                </div>
+        <div className="filter">
+          <p className="filter__results-found">3 results</p>
 
-                <div className="filter">
-                    <p className="filter__results-found">3 results</p>
+          <button
+            type="button"
+            className="filter__button"
+            onClick={() => {
+              document.querySelector("body").classList.add("no-scroll")
+              dispatch(openModal({ name: "advanced-search" }))
+            }}
+          >
+            Advanced search
+            <img src="icons/filter.svg" className="filter__icon" />
+          </button>
+        </div>
+      </form>
 
-                    <button type="button" className="filter__button">
-                        Filters
-                        <img src="icons/filter.svg" className="filter__icon"/>
-                    </button>
-                </div>
-            </form>
-
-            <Result />
-
-        </main>
-    )
+      <Result/>
+    </main>
+  );
 }
 
-export default MainPage
+export default MainPage;

@@ -1,0 +1,56 @@
+@import "../../../shared/ui/variables.scss";
+@import "../../../shared/ui/animation.scss";
+.search-modal {
+  width: 1184px;
+  height: 100vh;
+  padding-inline: 64px;
+  margin-inline: auto;
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  &__header {
+    padding-block: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &--opened {
+    animation: open 0.5s forwards;
+    & > * {
+      opacity: 0;
+      animation: appeare 0.5s 0.5s forwards;
+    }
+  }
+  &--closed {
+    animation: close 0.5s 0.5s forwards;
+    & > * {
+      animation: disappeare 0.5s forwards;
+    }
+  }
+}
+.icon {
+  width: 64px;
+  aspect-ratio: 1;
+}
+.close-button {
+  width: 48px;
+  aspect-ratio: 1;
+  background: transparent;
+}
+
+@keyframes open {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100vh;
+  }
+}
+@keyframes close {
+  from {
+    height: 100vh;
+  }
+  to {
+    height: 0;
+  }
+}
