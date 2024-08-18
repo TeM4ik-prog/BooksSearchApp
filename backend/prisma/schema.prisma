@@ -19,16 +19,53 @@ model Users {
   // products Products[] @relation("EmployeeProducts")
 }
 
-model Book {
-  id            Int     @id @default(autoincrement())
-  title         String?
-  author        String?
-  publishedDate String?
-  publisher     String?
-  pageCount     Int?
-  category      String?
-  infoLink      String?
-  imageLink     String?
+// ________________________________________________________________
 
-  @@map("books") // Название таблицы в базе данных
+model Book {
+  id                  Int            @id @default(autoincrement())
+  title               String?
+  description         String?
+  industryIdentifiers String?
+  pageCount           Int?
+  averageRating       Float?
+  imageLink           String?
+  language            String?
+  publishedDate       String?
+  infoLink            String?
+  previewLink         String?
+  publisher           String?
+  publishedAsOf       String?
+  readingStatus       String?
+  authors             BookAuthor[]
+  categories          BookCategory[]
+}
+
+model Author {
+  id    Int          @id @default(autoincrement())
+  name  String       @unique
+  books BookAuthor[]
+}
+
+model Category {
+  id    Int            @id @default(autoincrement())
+  name  String         @unique
+  books BookCategory[]
+}
+
+model BookAuthor {
+  bookId   Int
+  authorId Int
+  book     Book   @relation(fields: [bookId], references: [id])
+  author   Author @relation(fields: [authorId], references: [id])
+
+  @@id([bookId, authorId])
+}
+
+model BookCategory {
+  bookId     Int
+  categoryId Int
+  book       Book     @relation(fields: [bookId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@id([bookId, categoryId])
 }

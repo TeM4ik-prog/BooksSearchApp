@@ -1,0 +1,35 @@
+@import "../../../shared/ui/variables.scss";
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__results-found {
+    font-size: 48px;
+    font-weight: 500;
+  }
+
+  &__button {
+    font-size: 48px;
+    font-weight: 500;
+    color: $white;
+    padding: 16px 32px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    background-color: $primary;
+  }
+
+  &__icon {
+    width: 48px;
+    aspect-ratio: 1;
+  }
+}

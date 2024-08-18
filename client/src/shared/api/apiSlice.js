@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getTokenFromLocalStorage } from "../helper/localstorage";
+import joinParams from "./../helper/url-params";
 export const bookApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -8,7 +9,7 @@ export const bookApi = createApi({
   }),
   endpoints: (builder) => ({
     getBooks: builder.query({
-      query: (page, count) => `/books?page=1&limit=16&author=pushkin&title=s`,
+      query: (params) => `/books?${joinParams(params)}`,
     }),
     register: builder.mutation({
       query: (userData) => ({

@@ -1,11 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Prisma } from '@prisma/client';
 
 @Controller('users')
 export class UsersController {
-
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   create(@Body() usersCreateDto: Prisma.UsersCreateInput) {
@@ -16,6 +23,4 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
-
-
 }

@@ -1,7 +1,4 @@
-import {
-  changeModalAnimation,
-  init,
-} from "#shared/model/modalSlice.js";
+import { changeModalAnimation, init } from "#shared/model/modalSlice.js";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

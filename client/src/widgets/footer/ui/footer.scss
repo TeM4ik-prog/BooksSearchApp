@@ -3,10 +3,10 @@
 .footer {
   width: 100%;
   display: flex;
+  align-items: center;
   background-color: $primary;
-  padding: calc(0.5rem + 0.75vw) calc(0.5rem + 1.25vw);
+  padding-block: 32px;
   padding-inline: clamp(16px, 4.45vw, 64px);
-  flex-direction: row;
   justify-content: space-between;
 
   &__nav {

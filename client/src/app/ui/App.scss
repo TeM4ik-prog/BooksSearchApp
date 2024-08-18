@@ -9,8 +9,7 @@
 
 #root {
   width: 100vw;
-  min-height: 100vh;
-  height: fit-content;
+  height: max-content;
   background-color: $white;
   position: relative;
   font-synthesis: none;
@@ -23,6 +22,7 @@
 body {
   max-width: 100vw;
   margin: 0;
+  height: 100vh;
 
   display: flex;
 
@@ -30,7 +30,9 @@ body {
   overflow: auto;
   &.no-scroll {
     overflow-y: hidden;
-    & > * > * {padding-right: calc(64px + 16px);}
+    & > * > * {
+      padding-right: calc(64px + 16px);
+    }
   }
   &::-webkit-scrollbar {
     width: 16px;
@@ -39,7 +41,6 @@ body {
     background-color: $white;
   }
   &::-webkit-scrollbar-thumb {
-    height: 512px;
     background-color: $primary;
   }
   & * {

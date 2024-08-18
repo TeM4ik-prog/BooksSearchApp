@@ -9,16 +9,18 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
-  app.use(express.static(join(__dirname, '../..', 'client', 'dist')));
+  app.use(express.static(join(__dirname, '../../..', 'client', 'dist')));
 
   app.use((req, res, next) => {
     if (req.path.startsWith('/api')) {
       next();
     } else {
-      res.sendFile(join(__dirname, '../..', 'client', 'dist', 'index.html'));
+      res.sendFile(join(__dirname, '../../..', 'client', 'dist', 'index.html'));
     }
   });
 
-  await app.listen(3000)
+  await app.listen(3000);
+
+  console.log('Server is running on http://localhost:3000');
 }
-bootstrap()
+bootstrap();

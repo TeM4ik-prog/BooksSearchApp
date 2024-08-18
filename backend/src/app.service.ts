@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { account } from './appwrite';
+
 import { Account, Client, OAuthProvider } from 'appwrite';
-import { } from "./appwrite"
 
 @Injectable()
 export class AppService {
@@ -11,9 +10,9 @@ export class AppService {
   constructor() {
     const client = new Client()
       .setEndpoint('http://localhost:3000')
-      .setProject('66ae610100071f6817d2')
+      .setProject('66ae610100071f6817d2');
 
-    this.account = new Account(client)
+    this.account = new Account(client);
   }
 
   login() {
@@ -22,11 +21,7 @@ export class AppService {
     return this.account.createOAuth2Session(
       OAuthProvider.Google,
       redirectURL,
-      redirectURL
+      redirectURL,
     );
-
-    
-
-
   }
 }

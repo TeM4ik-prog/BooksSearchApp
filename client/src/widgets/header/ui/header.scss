@@ -3,6 +3,7 @@
 .header {
   width: 100%;
   aspect-ratio: 1.5;
+  max-height: 960px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,7 +11,7 @@
   align-items: end;
   background-image: url("../assets/header-bg.webp");
   background-attachment: local;
-  background-size: cover;
+  background-size: 100vw;
   padding-inline: clamp(16px, 4.45vw, 64px);
   &__top {
     position: absolute;

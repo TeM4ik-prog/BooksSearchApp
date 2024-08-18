@@ -1,5 +1,5 @@
 import React from "react";
-import SearchForm from "#features/search";
+import SearchForm from "#features/advanced-search";
 import CloseButton from "#shared/assets/close-button.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { changeModalAnimation, closeModal } from "#shared/model/modalSlice.js";
@@ -26,7 +26,7 @@ function SearchModal() {
             changeModalAnimation({ name: "advanced-search", animation: null }),
           );
           dispatch(closeModal({ name: "advanced-search" }));
-          document.querySelector("body").classList.remove("no-scroll")
+          document.querySelector("body").classList.remove("no-scroll");
         }
       }}
     >

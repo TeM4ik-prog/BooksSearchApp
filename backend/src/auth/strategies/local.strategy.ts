@@ -5,18 +5,19 @@ import { AuthService } from '../auth.service';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, 'google') {
-    constructor(private authService: AuthService) {
-        super({ usernameField: 'email' })
+  constructor(private authService: AuthService) {
+    super({ usernameField: 'email' });
+  }
+
+  async validate(email: string, password: string) {
+    const user = await this.authService.validateUser(email, password);
+    console.log(user);
+
+    if (user) {
+      return user;
     }
-
-    async validate(email: string, password: string) {
-        const user = await this.authService.validateUser(email, password)
-        console.log(user)
-
-        if (user) {
-            return user
-        }
-        throw new UnauthorizedException(`Invalid email ${email} and password ${password}`)
-
-    }
+    throw new UnauthorizedException(
+      `Invalid email ${email} and password ${password}`,
+    );
+  }
 }
